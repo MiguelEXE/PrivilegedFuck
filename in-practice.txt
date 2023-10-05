@@ -1,0 +1,28 @@
+If you start the interpreter at and specify '-p', that will start the main program/routine as a 'privileged' routine
+Each command can sets the result of some positive cells depending on it's results. The cell zero ALWAYS changes, since it's the errno cell.
+Here's a list of some special commands:
+- Command 0 (FORK): no arguments. (Can only execute on the main routine)
+Clones the main routine and sets cell 1 to it's (forked) routine id. This command doesn't throw, so it should ALWAYS set cell 0 to zero
+
+- Command 1 (RESUME): Cell -3: routine id. Cell -4: instruction counter limit. (Can only execute on the main routine)
+Stops the main routine and switches context to the specified routine and run instruction counter limit instructions.
+If by any case the routine ends it's execution (by EOF or explicitly yielding), the routine should yield immediatly
+If the instruction counter limit reaches zero, the routine immediatly yields and switches back to the main routine.
+If the instruction counter limit is zero, the instruction counter is disabled and thus the routine can ONLY YIELD by EOF or by explicitly yielding
+(note: if cell zero is 0, doesn't mean that the command was successful but yet means that the coroutine explictly yielded, see errno.md)
+
+This command CAN THROW errno range from 0 > errno > 14
+
+- Command 2 (YIELD): All of the negative cells content (with the exception of the trigger/negative one cell). (coroutine only, all negative cells)
+All arguments should be copied to main routine's negative cell and the routine will context switch to main routine.
+This command CANNOT throw (cell zero ALWAYS is zero).
+
+- Command 2 (SLEEP): no arguments. (main routine only)
+The interpreter will sleep by a interpreter defined time delay.
+This command CANNOT throw. (cell zero ALWAYS is zero)
+
+- Command 3 (DESTROY): cell[-3] as an routine id: (main routine only)
+If routine id is zero (main routine id), the interpreter should free all resources and exit.
+If routine id is a non zero, check if the routine is destroyed or uninitialized, if it is, then throw errno. 15
+or else free routine's resources.
+This command CAN throw only errno 15.

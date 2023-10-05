@@ -1,0 +1,3 @@
+Some goals that I want to do
+1. Probably theres a cache glitch which can cause errno 7 to be thrown.
+2. Filesystem special commands implementation.
