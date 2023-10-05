@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+/* LibPF functions
+ *
+ * Written by MiguelEXE and PrivilegedFuck contributors.
+ */
 #include "libpf.h"
 #include <stdio.h>
 #include <stdlib.h>

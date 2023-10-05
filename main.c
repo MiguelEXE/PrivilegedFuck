@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+/* Example/test main file
+ *
+ * Written by MiguelEXE and PrivilegedFuck contributors.
+ */
 #include "libpf.c"
 
 int main(int argc, char* argv[]){

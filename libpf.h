@@ -1,3 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
+/* LibPF globals, structs and macros
+ *
+ * Written by MiguelEXE and PrivilegedFuck contributors.
+ */
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
